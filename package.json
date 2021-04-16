@@ -8,9 +8,14 @@
     "watch": "tsc -w ",
     "nodemon": "nodemon",
     "frontend": "cd frontend && npm start",
-    "build": "cd frontend && npm run build",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "install-frontend":"cd frontend && npm install",
+    "heroku-postbuild":"npm run install-frontend && npm run build",
+    "build": "cd frontend && npm run build"
   },
+  "engines":{
+    "node":"14.x"
+  },
+
   "author": "",
   "license": "ISC",
   "dependencies": {
