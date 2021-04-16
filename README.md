@@ -10,14 +10,17 @@ Gestion des droits administrateurs
 Suppression de compte
 Le forum:
 
-Accès au forum
+Accès au forum:
 Possibilité de poster une publication
 Possibilité de supprimer une publication, si l'on dispose des droits suffisants
 Possibilité de modérer une publication si jugé innapropriée, si l'on dispose des droits suffisants
 Possibilité d'envoyer un commentaire
 Possibilité de récupérer tous les messages d'un utilisateur en particulier
-Stack :
 
+Stack :
 Backend: Node.js ,Express ,MongoDb
 
 Front-end: React.js ( hooks , context api )
+
+Deployé sur heroku à l'adresse :
+https://devmaniaa.herokuapp.com/
