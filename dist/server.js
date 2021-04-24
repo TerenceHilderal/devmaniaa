@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = __importDefault(require("express"));
 var path_1 = __importDefault(require("path"));
 require('dotenv').config();
+require('./database');
 var PORT = process.env.PORT || 7000;
 var app = express_1.default();
 app.use(express_1.default.json());

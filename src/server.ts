@@ -1,6 +1,7 @@
 import express, { Request, Response } from 'express';
 import path from 'path';
 require('dotenv').config();
+require('./database')
 
 const PORT = process.env.PORT || 7000;
 
