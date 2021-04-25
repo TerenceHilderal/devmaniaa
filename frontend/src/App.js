@@ -1,27 +1,13 @@
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
-import React, { useState } from 'react';
+import Homepage from './components/Homepage'
 
 const App = () => {
-	const [msg, setMsg] = useState('');
-	const handleClick = async () => {
-		const data = await fetch('/api');
-		const json = await data.json();
-		const msg = json.msg;
-		setMsg(msg);
-	};
+
 	return (
-		<div className='App'>
-			<header className='App-header'>
-				<img src={logo} className='App-logo' alt='logo' />
-				<p>
-					Edit <code>src/App.js</code> and save to reload.
-				</p>
-				<button onClick={handleClick}>Dis bonjour</button>
-				<p>{msg}</p>
-			</header>
-		</div>
-	);
+		<Homepage/>
+
+	)
 };
 
 export default App;
