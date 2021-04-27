@@ -4,6 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var mongoose_1 = __importDefault(require("mongoose"));
+var bcrypt_1 = __importDefault(require("bcrypt"));
 var Schema = mongoose_1.default.Schema;
 var userSchema = new Schema({
     email: { type: String, required: true, unique: true },
@@ -13,7 +14,10 @@ var userSchema = new Schema({
     posts: { type: [String], required: false },
     avatar: { type: String, required: false },
     friends: { type: [String], required: false },
-    isAdmin: { type: Boolean, default: 0 }
+    isAdmin: { type: Boolean, default: 0 },
 });
+userSchema.statics.hashPassword = function (password) {
+    return bcrypt_1.default.hash(password, 12);
+};
 var User = mongoose_1.default.model('user', userSchema);
 module.exports = User;

@@ -7,13 +7,13 @@ var express_1 = __importDefault(require("express"));
 var path_1 = __importDefault(require("path"));
 require('dotenv').config();
 require('./database');
+var usersRoutes = require('./components/users/users.routes.js');
 var PORT = process.env.PORT || 7000;
 var app = express_1.default();
 app.use(express_1.default.json());
+app.use(express_1.default.urlencoded({ extended: true }));
 app.use(express_1.default.static('frontend/build'));
-app.get('/api', function (req, res) {
-    res.send({ msg: 'Hello Master972' });
-});
+app.use('/api', usersRoutes);
 app.get('/*', function (req, res) {
     res.sendFile(path_1.default.join(__dirname, '../frontend/build', 'index.html'));
 });

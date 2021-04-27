@@ -46,9 +46,9 @@ var bdConnect = function () { return __awaiter(void 0, void 0, void 0, function 
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, mongoose_1.default.connect(process.env["DB_ADMIN"], {
+                return [4 /*yield*/, mongoose_1.default.connect(process.env['DB_ADMIN'], {
                         useNewUrlParser: true,
-                        useUnifiedTopology: true
+                        useUnifiedTopology: true,
                     })];
             case 1:
                 _a.sent();
@@ -63,10 +63,3 @@ var bdConnect = function () { return __awaiter(void 0, void 0, void 0, function 
     });
 }); };
 bdConnect();
-// mongoose.connect(process.env["DB_ADMIN"],
-//   {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true
-//   })
-//   .then(() => console.log('Connexion à MongoDB réussie !'))
-//   .catch(() => console.log('Connexion à MongoDB échouée !'));
