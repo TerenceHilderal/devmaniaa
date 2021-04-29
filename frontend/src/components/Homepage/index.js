@@ -1,7 +1,8 @@
 import React from 'react';
-import Button from 'react-bootstrap/Button';
+import Buttons from 'react-bootstrap/Button';
 import logo from './hacker.svg';
 import panthere from './panthere.jpeg';
+import Signup from '../Signup';
 import './homepage.css';
 
 const Homepage = () => {
@@ -15,13 +16,10 @@ const Homepage = () => {
 					<h2>
 						Join a dev community :<b>DevManiaa</b>{' '}
 					</h2>
-					<Button variant='success' size='lg' block>
-						Sign-up
-					</Button>{' '}
-					<br />
-					<Button variant='outline-success' size='lg' block>
+					<Signup />
+					<Buttons variant='outline-success' size='lg' block>
 						Log-in
-					</Button>{' '}
+					</Buttons>{' '}
 				</div>
 			</header>
 		</div>
