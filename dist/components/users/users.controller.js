@@ -67,7 +67,13 @@ exports.signup = function (req, res) { return __awaiter(void 0, void 0, void 0, 
                 if (!token) {
                     throw new Error('Sorry,something gone wrong,please try again later');
                 }
-                res.status(201).json({ newProfile: newUser, token: token });
+                res.status(201).json({
+                    id: newUser.id,
+                    email: newUser.email,
+                    username: newUser.username,
+                    description: newUser.description,
+                    token: token,
+                });
                 return [3 /*break*/, 4];
             case 3:
                 error_1 = _a.sent();

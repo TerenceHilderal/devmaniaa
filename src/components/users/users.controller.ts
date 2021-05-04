@@ -25,7 +25,13 @@ exports.signup = async (req: Request, res: Response) => {
 			throw new Error('Sorry,something gone wrong,please try again later');
 		}
 
-		res.status(201).json({ newProfile: newUser, token: token });
+		res.status(201).json({
+			id: newUser.id,
+			email: newUser.email,
+			username: newUser.username,
+			description: newUser.description,
+			token: token,
+		});
 	} catch (error) {
 		res.status(400).json({ error: error.message });
 	}
