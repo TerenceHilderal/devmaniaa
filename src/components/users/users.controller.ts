@@ -4,11 +4,17 @@ import jwt from 'jsonwebtoken';
 
 exports.signup = async (req: Request, res: Response) => {
 	const bodyRequest = req.body;
+	const email: string = req.body.email;
+	const password: string = req.body.password;
 	const email_regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+	const password_regex = /^(?=.*[\d])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*])[\w!@#$%^&*]{8,}$/;
 
 	try {
-		if (!email_regex.test(req.body.email)) {
-			throw new Error('wrong mail format');
+		if (!email_regex.test(email)) {
+			throw new Error('Wrong mail format');
+		}
+		if (!password_regex.test(password) || email === null || undefined) {
+			throw new Error('Wrong password format');
 		}
 
 		const newUser = await createUser(bodyRequest);

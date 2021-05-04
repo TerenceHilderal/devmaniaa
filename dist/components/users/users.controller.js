@@ -42,17 +42,23 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var createUser = require('../../database/queries/users.queries').createUser;
 var jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 exports.signup = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var bodyRequest, email_regex, newUser, token, error_1;
+    var bodyRequest, email, password, email_regex, password_regex, newUser, token, error_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 bodyRequest = req.body;
+                email = req.body.email;
+                password = req.body.password;
                 email_regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                password_regex = /^(?=.*[\d])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*])[\w!@#$%^&*]{8,}$/;
                 _a.label = 1;
             case 1:
                 _a.trys.push([1, 3, , 4]);
-                if (!email_regex.test(req.body.email)) {
-                    throw new Error('wrong mail format');
+                if (!email_regex.test(email)) {
+                    throw new Error('Wrong mail format');
+                }
+                if (!password_regex.test(password) || email === null || undefined) {
+                    throw new Error('Wrong password format');
                 }
                 return [4 /*yield*/, createUser(bodyRequest)];
             case 2:
