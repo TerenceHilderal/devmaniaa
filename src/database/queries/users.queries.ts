@@ -13,6 +13,6 @@ exports.createUser = async (user: any) => {
 		});
 		return newUser.save();
 	} catch (error) {
-		console.log(error);
+		throw new Error(error);
 	}
 };
