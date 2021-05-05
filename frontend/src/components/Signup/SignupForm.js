@@ -1,13 +1,14 @@
 import Form from 'react-bootstrap/Form';
 import Buttons from '../Buttons';
 import { useForm } from 'react-hook-form';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { Redirect } from 'react-router-dom';
 import { handleSignup } from '../../api/users';
+import { UserContext } from '../../App';
 
 export const SignupForm = () => {
 	// const [redirect, setredirect] = useState(false);
-
+	const { handleAlert } = useContext(UserContext);
 	const {
 		register,
 		handleSubmit,
@@ -15,7 +16,17 @@ export const SignupForm = () => {
 	} = useForm();
 
 	const onSubmit = (formAnswers) => {
-		handleSignup(formAnswers).then().catch();
+		handleSignup(formAnswers)
+			.then((res) => {
+				localStorage.setItem('token', res.data.token);
+				const user = {
+					email: res.data.email,
+					username: res.data.username,
+					description: res.data.description,
+				};
+				handleAlert('success', 'Registration has been a success');
+			})
+			.catch((error) => handleAlert('danger', error.response.data.error));
 	};
 
 	const styleError = { color: 'red' };
