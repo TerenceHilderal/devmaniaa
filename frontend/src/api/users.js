@@ -6,3 +6,6 @@ const url_api_users = 'http://localhost:7000/api/users';
 
 export const handleSignup = (formAnswers) =>
 	axios.post(`${url_api_users}/signup`, formAnswers);
+
+export const handleLogin = (formAnswers) =>
+	axios.post(`${url_api_users}/login`, formAnswers);
