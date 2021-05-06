@@ -1,0 +1,40 @@
+.Homepage {
+	text-align: center;
+}
+
+.Homepage-logo {
+	pointer-events: none;
+	width: 50%;
+	height: 100vh;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	.Homepage-logo {
+		animation: Homepage-logo-spin infinite 20s linear;
+	}
+}
+
+.Homepage-header {
+	background-color: black;
+	min-height: 100vh;
+	display: flex;
+	align-items: center;
+	font-size: calc(10px + 2vmin);
+	color: white;
+}
+
+.Homepage-panthere {
+	width: 200px;
+}
+
+@keyframes Homepage-logo-spin {
+	0% {
+		opacity: 1;
+	}
+	40% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
