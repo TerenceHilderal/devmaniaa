@@ -24,8 +24,13 @@ const userSchema = new Schema({
 });
 
 userSchema.plugin(validator, { message: 'already taken' });
+
 userSchema.statics.hashPassword = (password) => {
 	return bcrypt.hash(password, 12);
+};
+
+userSchema.statics.comparePassword = (password, requestPassword) => {
+	return bcrypt.compare(password, requestPassword);
 };
 
 const User = mongoose.model('user', userSchema);

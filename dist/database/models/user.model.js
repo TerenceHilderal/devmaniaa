@@ -30,5 +30,8 @@ userSchema.plugin(mongoose_unique_validator_1.default, { message: 'already taken
 userSchema.statics.hashPassword = function (password) {
     return bcrypt_1.default.hash(password, 12);
 };
+userSchema.statics.comparePassword = function (password, requestPassword) {
+    return bcrypt_1.default.compare(password, requestPassword);
+};
 var User = mongoose_1.default.model('user', userSchema);
 module.exports = User;
