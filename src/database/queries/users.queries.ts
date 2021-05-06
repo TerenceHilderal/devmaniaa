@@ -4,6 +4,7 @@ exports.createUser = async (user: any) => {
 	try {
 		const password = await User.hashPassword(user.password);
 		const newUser = new User({
+			id: user.id,
 			email: user.email,
 			password: password,
 			username: user.username,

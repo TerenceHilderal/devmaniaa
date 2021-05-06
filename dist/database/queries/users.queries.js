@@ -46,6 +46,7 @@ exports.createUser = function (user) { return __awaiter(void 0, void 0, void 0, 
             case 1:
                 password = _a.sent();
                 newUser = new User({
+                    id: user.id,
                     email: user.email,
                     password: password,
                     username: user.username,
