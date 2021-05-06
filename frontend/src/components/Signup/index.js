@@ -26,7 +26,8 @@ export const Signup = () => {
 					<Modal.Title>Welcome! Welcome </Modal.Title> <br />
 				</Modal.Header>
 				<Modal.Body>
-					<SignupForm />
+					{' '}
+					<SignupForm />{' '}
 				</Modal.Body>
 				{alert && <Alerts variant={alert.variant} text={alert.text} />}
 			</Modal>
