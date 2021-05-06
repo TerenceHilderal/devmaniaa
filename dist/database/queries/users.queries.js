@@ -61,3 +61,38 @@ exports.createUser = function (user) { return __awaiter(void 0, void 0, void 0, 
         }
     });
 }); };
+exports.checkUserExistence = function (email) { return __awaiter(void 0, void 0, void 0, function () {
+    var existingUser;
+    return __generator(this, function (_a) {
+        try {
+            existingUser = User.findOne({ email: email });
+            if (!existingUser || null) {
+                throw new Error('Sorry this user do not exist');
+            }
+            else {
+                return [2 /*return*/, existingUser];
+            }
+        }
+        catch (error) {
+            throw new Error(error);
+        }
+        return [2 /*return*/];
+    });
+}); };
+exports.checkPassword = function (password, requestPassword) { return __awaiter(void 0, void 0, void 0, function () {
+    var matchingPassword, error_2;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                return [4 /*yield*/, User.comparePassword(password, requestPassword)];
+            case 1:
+                matchingPassword = _a.sent();
+                return [2 /*return*/, matchingPassword];
+            case 2:
+                error_2 = _a.sent();
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
+        }
+    });
+}); };
