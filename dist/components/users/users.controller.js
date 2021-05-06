@@ -79,7 +79,6 @@ exports.signup = function (req, res) { return __awaiter(void 0, void 0, void 0, 
                     username: newUser.username,
                     description: newUser.description,
                     token: token,
-                    message: 'Your account has been successufully created',
                 });
                 return [3 /*break*/, 4];
             case 3:
@@ -116,7 +115,15 @@ exports.login = function (req, res) { return __awaiter(void 0, void 0, void 0, f
                     throw new Error('Incorrect token');
                 }
                 if (existingUser && matchingPassword) {
-                    res.status(200).json({ user: existingUser, token: token });
+                    res.status(200).json({
+                        email: existingUser.email,
+                        username: existingUser.username,
+                        description: existingUser.description,
+                        posts: existingUser.posts,
+                        avatar: existingUser.avatar,
+                        friends: existingUser.friends,
+                        token: token,
+                    });
                 }
                 else {
                     throw new Error('Sorry something gone wrong try again later');
