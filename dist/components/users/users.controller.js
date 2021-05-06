@@ -39,8 +39,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var createUser = require('../../database/queries/users.queries').createUser;
 var jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+var _a = require('../../database/queries/users.queries'), createUser = _a.createUser, checkUserExistence = _a.checkUserExistence, checkPassword = _a.checkPassword;
 exports.signup = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var bodyRequest, email, password, email_regex, password_regex, newUser, token, error_1;
     return __generator(this, function (_a) {
@@ -71,7 +71,7 @@ exports.signup = function (req, res) { return __awaiter(void 0, void 0, void 0, 
                         expiresIn: '3600s',
                     });
                 if (!token) {
-                    throw new Error('Sorry,something gone wrong,please try again later');
+                    throw new Error('Incorrect token');
                 }
                 res.status(201).json({
                     id: newUser.id,
@@ -79,11 +79,52 @@ exports.signup = function (req, res) { return __awaiter(void 0, void 0, void 0, 
                     username: newUser.username,
                     description: newUser.description,
                     token: token,
+                    message: 'Your account has been successufully created',
                 });
                 return [3 /*break*/, 4];
             case 3:
                 error_1 = _a.sent();
                 res.status(400).json({ error: error_1.message });
+                return [3 /*break*/, 4];
+            case 4: return [2 /*return*/];
+        }
+    });
+}); };
+exports.login = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var existingUser, matchingPassword, token, error_2;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                _a.trys.push([0, 3, , 4]);
+                return [4 /*yield*/, checkUserExistence(req.body.email)];
+            case 1:
+                existingUser = _a.sent();
+                if (!existingUser || null) {
+                    throw new Error("Sorry can't find your account");
+                }
+                return [4 /*yield*/, checkPassword(req.body.password, existingUser.password)];
+            case 2:
+                matchingPassword = _a.sent();
+                if (!matchingPassword || null) {
+                    throw new Error('Sorry try again');
+                }
+                token = 'Bearer ' +
+                    jsonwebtoken_1.default.sign({ id: existingUser.id }, process.env['TOKEN_SECRET'], {
+                        expiresIn: '3600s',
+                    });
+                if (!token) {
+                    throw new Error('Incorrect token');
+                }
+                if (existingUser && matchingPassword) {
+                    res.status(200).json({ user: existingUser, token: token });
+                }
+                else {
+                    throw new Error('Sorry something gone wrong try again later');
+                }
+                return [3 /*break*/, 4];
+            case 3:
+                error_2 = _a.sent();
+                res.status(400).json({ error: error_2.message });
                 return [3 /*break*/, 4];
             case 4: return [2 /*return*/];
         }
