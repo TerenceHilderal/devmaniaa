@@ -7,12 +7,12 @@ import { handleSignup } from '../../api/users';
 import { UserContext } from '../../App';
 
 export const SignupForm = () => {
-	// const [redirect, setredirect] = useState(false);
-	const { handleAlert } = useContext(UserContext);
+	const [redirect, setredirect] = useState(false);
+	const { handleAlert, setProfile } = useContext(UserContext);
 	const {
 		register,
 		handleSubmit,
-		formState: { errors, isSubmitted },
+		formState: { errors, isSubmitting },
 	} = useForm();
 
 	const onSubmit = (formAnswers) => {
@@ -20,14 +20,18 @@ export const SignupForm = () => {
 			.then((res) => {
 				localStorage.setItem('token', res.data.token);
 				const user = {
+					id: res.data.id,
 					email: res.data.email,
 					username: res.data.username,
 					description: res.data.description,
 				};
+
 				handleAlert('success', 'Registration has been a success');
+				// setredirect(true);
 			})
 			.catch((error) => handleAlert('danger', error.response.data.error));
 	};
+	console.log(setProfile);
 
 	const styleError = { color: 'red' };
 
@@ -63,8 +67,8 @@ export const SignupForm = () => {
 
 					{errors.password && (
 						<span style={styleError}>
-							Must contain at least east 1 lowercase letter - 1 capital letter -
-							1 number - 1 special character:!@#$%^&*
+							Must contain at least 1 lowercase letter - 1 capital letter - 1
+							number - 1 special character:!@#$%^&*
 						</span>
 					)}
 				</Form.Group>
@@ -103,11 +107,11 @@ export const SignupForm = () => {
 					text='Register'
 					variant='success'
 					type='submit'
-					// disabled={isSubmitted}
+					disabled={isSubmitting}
 					// onClick={() => setredirect(true)}
 				></Buttons>
 			</Form>
-			{/* {redirect && <Redirect to='/profile' />} */}
+			{redirect && <Redirect to='/profile' />}
 		</>
 	);
 };
