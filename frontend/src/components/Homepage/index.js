@@ -3,6 +3,7 @@ import Buttons from 'react-bootstrap/Button';
 import logo from './hacker.svg';
 import panthere from './panthere.jpeg';
 import Signup from '../Signup';
+import Login from '../Login';
 import './homepage.css';
 
 const Homepage = () => {
@@ -17,9 +18,7 @@ const Homepage = () => {
 						Join a dev community :<b>DevManiaa</b>{' '}
 					</h2>
 					<Signup />
-					<Buttons variant='outline-success' size='lg' block>
-						Log-in
-					</Buttons>{' '}
+					<Login />
 				</div>
 			</header>
 		</div>
