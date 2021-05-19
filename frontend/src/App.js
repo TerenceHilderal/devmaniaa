@@ -1,8 +1,8 @@
 import './App.css';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import LandingPage from './components/LandingPage';
 import { createContext, useState } from 'react';
-import Alerts from './components/Alert';
+import LandingPage from './components/LandingPage';
+import HomePage from './components/HomePage';
 export const UserContext = createContext();
 
 const App = () => {
@@ -20,7 +20,7 @@ const App = () => {
 			<UserContext.Provider value={{ handleAlert, alert }}>
 				<Router>
 					<Route exact path='/' component={LandingPage} />
-					<Route exact path='/alert' component={Alerts} />
+					<Route exact path='/homepage' component={HomePage} />
 				</Router>
 			</UserContext.Provider>
 		</>
