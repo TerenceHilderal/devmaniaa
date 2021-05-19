@@ -7,9 +7,9 @@ const Buttons = ({ onClick, text, variant, size, type, disabled }) => {
 		<Button
 			variant={variant}
 			size={size}
-			block
 			onClick={onClick}
 			type={type}
+			block
 			disabled={disabled}
 		>
 			{text}
