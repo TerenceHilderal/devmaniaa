@@ -1,0 +1,9 @@
+.postCard {
+	font-family: 'Montserrat', sans-serif;
+	font-size: 300;
+	max-width: 750px;
+	display: flex;
+	margin: 0 auto 0 auto;
+	padding-bottom: 1rem;
+	border-color: green;
+}

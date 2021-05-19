@@ -1,0 +1,9 @@
+.postform {
+	font-family: 'Montserrat', sans-serif;
+	font-size: 300;
+	max-width: 750px;
+	display: flex;
+	margin: 3rem auto 0 auto;
+	border-radius: 40px;
+	border-color: green;
+}
