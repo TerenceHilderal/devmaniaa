@@ -72,7 +72,7 @@ export const LoginForm = () => {
 					disabled={isSubmitting}
 				></Buttons>
 			</Form>
-			{redirect && <Redirect to='/profile' />}
+			{redirect && <Redirect to='/homepage' />}
 		</>
 	);
 };
