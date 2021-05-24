@@ -1,7 +1,8 @@
 import { Response, Request, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
+const user = require('../models/user.model');
 
-module.exports = async (req: Request, res: Response, next: NextFunction) => {
+module.exports = async (req: any, res: Response, next: NextFunction) => {
 	try {
 		const token = req?.headers?.authorization?.split(' ')[1];
 		const decodedToken: any = jwt.verify(
@@ -9,9 +10,12 @@ module.exports = async (req: Request, res: Response, next: NextFunction) => {
 			process.env['TOKEN_SECRET'],
 		);
 		const userId = decodedToken.id;
-		if (req.body.userId && req.body.userId !== userId) {
+		const userFound = await user.findOne({ _id: userId });
+
+		if (!user) {
 			throw new Error('Invalid user ID');
 		} else {
+			req.user = userFound;
 			next();
 		}
 	} catch (error) {

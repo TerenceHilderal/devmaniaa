@@ -40,24 +40,33 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+var user = require('../models/user.model');
 module.exports = function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
-    var token, decodedToken, userId;
+    var token, decodedToken, userId, userFound, error_1;
     var _a, _b;
     return __generator(this, function (_c) {
-        try {
-            token = (_b = (_a = req === null || req === void 0 ? void 0 : req.headers) === null || _a === void 0 ? void 0 : _a.authorization) === null || _b === void 0 ? void 0 : _b.split(' ')[1];
-            decodedToken = jsonwebtoken_1.default.verify(token, process.env['TOKEN_SECRET']);
-            userId = decodedToken.id;
-            if (req.body.userId && req.body.userId !== userId) {
-                throw new Error('Invalid user ID');
-            }
-            else {
-                next();
-            }
+        switch (_c.label) {
+            case 0:
+                _c.trys.push([0, 2, , 3]);
+                token = (_b = (_a = req === null || req === void 0 ? void 0 : req.headers) === null || _a === void 0 ? void 0 : _a.authorization) === null || _b === void 0 ? void 0 : _b.split(' ')[1];
+                decodedToken = jsonwebtoken_1.default.verify(token, process.env['TOKEN_SECRET']);
+                userId = decodedToken.id;
+                return [4 /*yield*/, user.findOne({ _id: userId })];
+            case 1:
+                userFound = _c.sent();
+                if (!user) {
+                    throw new Error('Invalid user ID');
+                }
+                else {
+                    req.user = userFound;
+                    next();
+                }
+                return [3 /*break*/, 3];
+            case 2:
+                error_1 = _c.sent();
+                res.status(403).json({ error: error_1.message });
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
         }
-        catch (error) {
-            res.status(403).json({ error: error.message });
-        }
-        return [2 /*return*/];
     });
 }); };
