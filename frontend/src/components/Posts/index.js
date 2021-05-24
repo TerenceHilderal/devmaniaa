@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './postForm.css';
 import Button from 'react-bootstrap/Button';
 import { useForm } from 'react-hook-form';
+import { sendingNewPost } from '../../api/posts';
 
 const PostForm = () => {
 	const {
@@ -11,14 +12,20 @@ const PostForm = () => {
 	} = useForm();
 
 	const onSubmit = (data) => {
-		console.log(data);
+		const formData = new FormData();
+		formData.append('content', data.content);
+		formData.append('attachment', data.attachment[0]);
+
+		sendingNewPost(formData)
+			.then((res) => console.log(res))
+			.catch((err) => console.log(err));
 	};
 
 	return (
 		<>
 			<div className='card postform'>
 				<form
-					method='post'
+					method='POST'
 					onSubmit={handleSubmit(onSubmit)}
 					encType='multipart/form-data'
 					className='postForm'
