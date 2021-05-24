@@ -1,18 +1,31 @@
-import mongoose from 'mongoose'
+import mongoose from 'mongoose';
 
-const {Schema}= mongoose
+const { Schema } = mongoose;
 
+const postSchema = new Schema(
+	{
+		content: { type: String, maxlength: 200, required: true },
+		attachment: { type: String, required: false },
+		likes: { type: Number, required: false, default: 0 },
+		dislikes: { type: Number, required: false, default: 0 },
+		postedBy: {
+			type: String,
+		},
+		comments: [
+			{
+				postedBy: {
+					type: String,
+				},
+				content: String,
+				likes: Number,
+				disklikes: Number,
+			},
+			{ timestamps: true },
+		],
+	},
+	{ timestamps: true },
+);
 
-const postSchema = new Schema({
-username:{type:String},
-body:{type:String,maxlength:200},
-attachment:{type:String,required:false},
-likes: { type: Number, required: false, default: 0 },
-dislikes: { type: Number, required: false, default: 0 },
-createdAt:{type:Date},
-comments:[{username:String,body:String,createdAt:Date,likes:Number,disklikes:Number}]
-})
+const Post = mongoose.model('post', postSchema);
 
-const Post = mongoose.model('post',postSchema)
-
-module.exports=Post;
+module.exports = Post;
