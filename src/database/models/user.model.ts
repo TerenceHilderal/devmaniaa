@@ -25,11 +25,14 @@ const userSchema = new Schema({
 
 userSchema.plugin(validator, { message: 'already taken' });
 
-userSchema.statics.hashPassword = (password) => {
+userSchema.statics.hashPassword = (password: string) => {
 	return bcrypt.hash(password, 12);
 };
 
-userSchema.statics.comparePassword = (password, requestPassword) => {
+userSchema.statics.comparePassword = (
+	password: string,
+	requestPassword: string,
+) => {
 	return bcrypt.compare(password, requestPassword);
 };
 
