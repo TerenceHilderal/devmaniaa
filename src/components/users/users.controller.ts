@@ -67,7 +67,7 @@ exports.login = async (req: Request, res: Response) => {
 		const token =
 			'Bearer ' +
 			jwt.sign({ id: existingUser.id }, process.env['TOKEN_SECRET'], {
-				expiresIn: '3600s',
+				expiresIn: '36000s',
 			});
 
 		if (!token) {
@@ -76,6 +76,7 @@ exports.login = async (req: Request, res: Response) => {
 
 		if (existingUser && matchingPassword) {
 			res.status(200).json({
+				id: existingUser.id,
 				email: existingUser.email,
 				username: existingUser.username,
 				description: existingUser.description,

@@ -109,13 +109,14 @@ exports.login = function (req, res) { return __awaiter(void 0, void 0, void 0, f
                 }
                 token = 'Bearer ' +
                     jsonwebtoken_1.default.sign({ id: existingUser.id }, process.env['TOKEN_SECRET'], {
-                        expiresIn: '3600s',
+                        expiresIn: '36000s',
                     });
                 if (!token) {
                     throw new Error('Incorrect token');
                 }
                 if (existingUser && matchingPassword) {
                     res.status(200).json({
+                        id: existingUser.id,
                         email: existingUser.email,
                         username: existingUser.username,
                         description: existingUser.description,
